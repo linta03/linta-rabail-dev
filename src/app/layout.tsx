@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/global/themeProvider";
+import Navbar from "@/components/global/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto_Condensed({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Linta Rabail",
@@ -16,8 +18,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <p>linta</p>
-      <body className={inter.className}>{children}</body>
+      <body className={roboto.className + "bg-white dark:bg-darkBg"}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
